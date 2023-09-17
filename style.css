@@ -1,9 +1,18 @@
-
-
 * {
     background-color: black;
     color: white;
 } 
+
+.leftPanel {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    justify-content: center; 
+}
 
 #grid {
     display: flex;
@@ -14,4 +23,11 @@
     border: 1px solid white;
     width: 750px;
     height: 750px;
+}
+
+.topRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
