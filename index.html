@@ -4,14 +4,13 @@
             <meta charset="utf-8">
             <title>Etch-a-Sketch</title>
             <link rel="stylesheet" href="style.css">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+              </style>
             <script src="script.js" defer></script>
         </head>
 
         <body>
-            <div class="topRow">
-                <h1>Etch-a-Sketch</h1>
-                <p>Click on the grid to start or stop drawing</p>
-            
             <div class="content">
                 <div class="leftPanel">
                     <button id="gridCapacity">Change Capacity</button>
@@ -19,8 +18,11 @@
                     <button id="colours">Random Colours</button>
                     <button id="greyScale">Grey Scale</button>
                 </div>
-                <div id="grid"></div>
-            </div>
+                <div class="topRow">
+                    <h1>Etch-a-Sketch</h1>
+                    <p>Click on the grid to start or stop drawing</p>
+                    <div id="grid"></div>
+                </div>
         </div>
         </body>
     </html>

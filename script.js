@@ -16,7 +16,8 @@ greyScaleButton.addEventListener('click', () =>
 toggleActiveFill("greyScale"));
 
 /* variables */
-let enteredSquaresPerSide,
+let gridSizeHMTL = 500,
+enteredSquaresPerSide,
 squaresPerSide = 16,
 fillStyle = "none",
 toggleDrawing = false;
@@ -32,8 +33,8 @@ for (x = 1; x <= totalSquares; x++) {
     name = document.createElement('div');
     name.classList.add("square", "zero");
     grid.appendChild(name);
-    name.style.cssText = `height: ${750 / squaresPerSide}px;
-                        width: ${750 / squaresPerSide}px;`
+    name.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                        width: ${gridSizeHMTL / squaresPerSide}px;`
 }
 
 const squares = document.querySelectorAll('.square');
@@ -51,10 +52,10 @@ squares.forEach(square => {
                 case "greyScale":
                     switch(shadePercentage[1]) {
                         case "zero": 
-                            square.classList.remove("zero")
-                            square.classList.add("twenty")
-                            break;
-                        case "twenty": 
+                        square.classList.remove("zero")
+                        square.classList.add("twenty")
+                        break;
+                    case "twenty": 
                             square.classList.remove("twenty")
                             square.classList.add("fourty")
                             break;
@@ -71,18 +72,18 @@ squares.forEach(square => {
                             square.classList.add("oneHundred")
                             break; 
                     }
-                    square.style.cssText = `height: ${750 / squaresPerSide}px;
-                                    width: ${750 / squaresPerSide}px;
+                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                                    width: ${gridSizeHMTL / squaresPerSide}px;
                                     background-color: ${getGreyScale(shadePercentage[1])};`;
                     break;
                 case "randomColours": 
-                    square.style.cssText = `height: ${750 / squaresPerSide}px;
-                    width: ${750 / squaresPerSide}px;
+                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                    width: ${gridSizeHMTL / squaresPerSide}px;
                     background-color: ${getColour()};`;
                     break;
                 case "none": 
-                    square.style.cssText = `height: ${750 / squaresPerSide}px;
-                    width: ${750 / squaresPerSide}px;
+                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                    width: ${gridSizeHMTL / squaresPerSide}px;
                     background-color: rgb(255,255,255);`;
                 }
             }
@@ -116,19 +117,16 @@ function clearGrid() {
 function toggleActiveFill(fillStlye) {
     switch(fillStlye){
         case "greyScale":
-            fillStyle == "greyScale"
             coloursButton.style.cssText = `background-color: none;`;
-            greyScaleButton.style.cssText = `background-color: green;`;
+            greyScaleButton.style.cssText = `background-color: rgb(0,0,102);`;
             fillStyle == "greyScale" ? fillStyle = "none" : fillStyle = "greyScale";
             break;
         case "randomColours": 
-        fillStyle == "randomColours"
-            coloursButton.style.cssText = `background-color: green;`;
+            coloursButton.style.cssText = `background-color: rgb(0,0,102);`;
             greyScaleButton.style.cssText = `background-color: none;`;
             fillStyle == "randomColours" ? fillStyle = "none" : fillStyle = "randomColours";
             break;
         case "none":
-            fillStyle == "none"
             coloursButton.style.cssText = `background-color: none;`;
             greyScaleButton.style.cssText = `background-color: none;`;
             break;
