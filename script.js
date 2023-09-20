@@ -1,5 +1,6 @@
 /* constants & listeners */
 const grid = document.querySelector("#grid");
+const drawingIndicator = document.querySelector("#drawingIndicator");
 
 const gridCapacityButton = document.querySelector('#gridCapacity');
 gridCapacityButton.addEventListener('click', () => setSquarePerSide())
@@ -20,7 +21,9 @@ let gridSizeHMTL = 500,
 enteredSquaresPerSide,
 squaresPerSide = 16,
 fillStyle = "none",
-toggleDrawing = false;
+toggleDrawing = false,
+darkBlue = "rgb(0,0,102)",
+lightOn = "rgb(255,69,0)";
 
 /* actual running code */
 etchSketch(squaresPerSide);
@@ -40,51 +43,56 @@ for (x = 1; x <= totalSquares; x++) {
 const squares = document.querySelectorAll('.square');
 squares.forEach(square => {
     square.addEventListener('click', () => {
-toggleDrawing ? toggleDrawing = false : toggleDrawing = true;
+        if(toggleDrawing) {
+            toggleDrawing = false
+            drawingIndicator.style.cssText = `background-color: inherit;`;
+        } else {
+            toggleDrawing = true;
+            drawingIndicator.style.cssText = `background-color: ${lightOn};`;
+        }
     })
 });
-
-squares.forEach(square => {
-    square.addEventListener('mouseover', () => {
-        if (toggleDrawing) {
-            let shadePercentage = square.className.split(" ");
-            switch(fillStyle) {
-                case "greyScale":
-                    switch(shadePercentage[1]) {
-                        case "zero": 
-                        square.classList.remove("zero")
-                        square.classList.add("twenty")
+    squares.forEach(square => {
+        square.addEventListener('mouseover', () => {
+            if (toggleDrawing) {
+                let shadePercentage = square.className.split(" ");
+                switch(fillStyle) {
+                    case "greyScale":
+                        switch(shadePercentage[1]) {
+                            case "zero": 
+                            square.classList.remove("zero")
+                            square.classList.add("twenty")
+                            break;
+                        case "twenty": 
+                                square.classList.remove("twenty")
+                                square.classList.add("fourty")
+                                break;
+                            case "fourty": 
+                                square.classList.remove("fourty")
+                                square.classList.add("sixty")
+                                break;
+                            case "sixty": 
+                                square.classList.remove("sixty")
+                                square.classList.add("eighty")
+                                break;
+                            case "eighty": 
+                                square.classList.remove("eighty")
+                                square.classList.add("oneHundred")
+                                break; 
+                        }
+                        square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                                        width: ${gridSizeHMTL / squaresPerSide}px;
+                                        background-color: ${getGreyScale(shadePercentage[1])};`;
                         break;
-                    case "twenty": 
-                            square.classList.remove("twenty")
-                            square.classList.add("fourty")
-                            break;
-                        case "fourty": 
-                            square.classList.remove("fourty")
-                            square.classList.add("sixty")
-                            break;
-                        case "sixty": 
-                            square.classList.remove("sixty")
-                            square.classList.add("eighty")
-                            break;
-                        case "eighty": 
-                            square.classList.remove("eighty")
-                            square.classList.add("oneHundred")
-                            break; 
-                    }
-                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
-                                    width: ${gridSizeHMTL / squaresPerSide}px;
-                                    background-color: ${getGreyScale(shadePercentage[1])};`;
-                    break;
-                case "randomColours": 
-                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
-                    width: ${gridSizeHMTL / squaresPerSide}px;
-                    background-color: ${getColour()};`;
-                    break;
-                case "none": 
-                    square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
-                    width: ${gridSizeHMTL / squaresPerSide}px;
-                    background-color: rgb(255,255,255);`;
+                    case "randomColours": 
+                        square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                        width: ${gridSizeHMTL / squaresPerSide}px;
+                        background-color: ${getColour()};`;
+                        break;
+                    case "none": 
+                        square.style.cssText = `height: ${gridSizeHMTL / squaresPerSide}px;
+                        width: ${gridSizeHMTL / squaresPerSide}px;
+                        background-color: rgb(255,255,255);`;
                 }
             }
         })
@@ -117,18 +125,30 @@ function clearGrid() {
 function toggleActiveFill(fillStlye) {
     switch(fillStlye){
         case "greyScale":
-            coloursButton.style.cssText = `background-color: none;`;
-            greyScaleButton.style.cssText = `background-color: rgb(0,0,102);`;
-            fillStyle == "greyScale" ? fillStyle = "none" : fillStyle = "greyScale";
+            if(fillStyle == "greyScale") {
+                fillStyle = "none"
+                greyScaleButton.style.cssText = `background-color: inherit;`;
+                coloursButton.style.cssText = `background-color: inherit;`;
+            } else {
+                fillStyle = "greyScale"
+                greyScaleButton.style.cssText = `background-color: ${darkBlue};`;
+                coloursButton.style.cssText = `background-color: inherit;`;
+            }
             break;
         case "randomColours": 
-            coloursButton.style.cssText = `background-color: rgb(0,0,102);`;
-            greyScaleButton.style.cssText = `background-color: none;`;
-            fillStyle == "randomColours" ? fillStyle = "none" : fillStyle = "randomColours";
+        if(fillStyle == "randomColours") {
+            fillStyle = "none"
+            greyScaleButton.style.cssText = `background-color: inherit;`;
+            coloursButton.style.cssText = `background-color: inherit;`;
+        } else {
+            fillStyle = "randomColours"
+            greyScaleButton.style.cssText = `background-color: inherit;`;
+            coloursButton.style.cssText = `background-color: ${darkBlue};`;
+        }
             break;
         case "none":
-            coloursButton.style.cssText = `background-color: none;`;
-            greyScaleButton.style.cssText = `background-color: none;`;
+            greyScaleButton.style.cssText = `background-color: inherit;`;
+            coloursButton.style.cssText = `background-color: inherit;`;
             break;
     }
 }
