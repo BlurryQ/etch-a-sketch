@@ -60,10 +60,10 @@ squares.forEach(square => {
                     case "greyScale":
                         switch(shadePercentage[1]) {
                             case "zero": 
-                            square.classList.remove("zero")
-                            square.classList.add("twenty")
-                            break;
-                        case "twenty": 
+                                square.classList.remove("zero")
+                                square.classList.add("twenty")
+                                break;
+                            case "twenty": 
                                 square.classList.remove("twenty")
                                 square.classList.add("fourty")
                                 break;
