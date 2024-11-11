@@ -4,7 +4,7 @@
 
 ## Summary
 
-**Hosted:** [Etch-a-Sketch Page](https://blurryq.github.io/etch-a-sketch/)
+**Hosted:** [Etch-a-Sketch](https://blurryq.github.io/etch-a-sketch/)
 
 I’ve created a digital Etch-a-Sketch game with added colorful (or grayscale) functionality to bring an interactive twist to a classic concept. Users can click on the grid to start and stop drawing, making it easy to sketch designs like smiley faces. The flexibility to toggle between grayscale and random colors adds a fun, dynamic element to the experience.
 
